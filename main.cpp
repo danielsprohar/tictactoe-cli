@@ -18,13 +18,14 @@ int main() {
         try {
             board.playerMove(position);
             if (board.hasWinner()) {
+                board.print();
+                board.printBoardPositions();
+
                 std::string message = "Player ";
                 message += board.getWinnerSymbol();
                 message += " is the winner";
 
                 std::cout << message << std::endl;
-                board.print();
-                board.printBoardPositions();
 
                 isRunning = false;
             } else if (board.hasTie()) {
