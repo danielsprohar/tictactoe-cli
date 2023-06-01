@@ -23,6 +23,9 @@ int main() {
                 message += " is the winner";
 
                 std::cout << message << std::endl;
+                board.print();
+                board.printBoardPositions();
+
                 isRunning = false;
             } else if (board.hasTie()) {
                 std::cout << "The game ended in a tie." << std::endl;

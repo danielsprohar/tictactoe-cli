@@ -6,11 +6,10 @@
 #include <algorithm>
 #include <chrono>
 
-void Board::print() {
+void Board::print() const {
     std::cout << "Game board";
 
-    const int size = this->ROWS * this->COLUMNS;
-    for (int i = 0; i < size; ++i) {
+    for (int i = 0; i < 9; ++i) {
         if (i % 3 == 0) {
             std::cout << "\n| ";
         }
@@ -23,12 +22,11 @@ void Board::print() {
 void Board::printBoardPositions() const {
     std::cout << "\nPositions";
 
-    const int size = this->ROWS * this->COLUMNS;
-    for (int i = 0; i < size; ++i) {
+    for (int i = 0; i < 9; ++i) {
         if (i % 3 == 0) {
             std::cout << "\n| ";
         }
-        std::cout << i + 1 << " | ";
+        std::cout << (this->isPositionAvailable(i) ? std::to_string(i + 1) : " ") << " | ";
     }
 
     std::cout << std::endl;
@@ -55,7 +53,7 @@ void Board::computerMove() {
     }
 }
 
-bool Board::hasTie() {
+bool Board::hasTie() const {
     return std::all_of(
             std::begin(this->_board),
             std::end(this->_board),
@@ -63,11 +61,11 @@ bool Board::hasTie() {
     );
 }
 
-bool Board::isPositionAvailable(int index) {
+bool Board::isPositionAvailable(int index) const {
     return this->_board[index] == this->OPEN_POSITION;
 }
 
-void Board::ensureValidMove(int position) {
+void Board::ensureValidMove(int position) const {
     if (position < 1 || position > 9) {
         std::string message = std::to_string(position) + " is NOT a valid position.";
         throw InvalidMove(message);

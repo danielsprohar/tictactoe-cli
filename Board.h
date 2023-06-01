@@ -4,20 +4,18 @@
 class Board {
 private:
     const char OPEN_POSITION = '*';
-    const int COLUMNS = 3;
-    const int ROWS = 3;
     char _board[9]{'*', '*', '*', '*', '*', '*', '*', '*', '*',};
     char _playerSymbol;
     char _computerSymbol;
     char _winnerSymbol;
 
-    bool isPositionAvailable(int index);
-    void ensureValidMove(int position);
+    [[nodiscard]] bool isPositionAvailable(int index) const;
+    void ensureValidMove(int position) const;
 
 public:
     Board() : _playerSymbol('X'), _computerSymbol('O'), _winnerSymbol('\0') {}
 
-    void print();
+    void print() const;
 
     void printBoardPositions() const;
 
@@ -27,7 +25,7 @@ public:
 
     bool hasWinner();
 
-    bool hasTie();
+    [[nodiscard]] bool hasTie() const;
 
     [[nodiscard]] char getWinnerSymbol() const {
         return _winnerSymbol;
